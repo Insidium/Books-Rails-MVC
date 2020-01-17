@@ -8,14 +8,24 @@ class BooksController < ApplicationController
 
     #Show a single book
     def show
+        if @data[params[:id].to_i] == nil
+            render plain: "#{params[:id]} is not a valid option."
+        else
+            render json: @data[params[:id].to_i]
+        end
     end
 
     #Create a new book
     def create
+        @data << {:title => params[:title], :author => params[:author]}
+        redirect_to "/"
     end
 
     #Update a book
     def update
+        
+        @data << {:title => params[:title], :author => params[:author]}
+        redirect_to "/"
     end
 
     #Remove a book
