@@ -3,12 +3,12 @@ class BooksController < ApplicationController
     before_action :setup_data
 
     def index
-        render json: @data
+        render json: @@data
     end
 
     #Show a single book
     def show
-        if @data[params[:id].to_i] == nil
+        if @@data[params[:id].to_i] == nil
             render plain: "#{params[:id]} is not a valid option."
         else
             render json: @data[params[:id].to_i]
@@ -17,15 +17,15 @@ class BooksController < ApplicationController
 
     #Create a new book
     def create
-        @data << {:title => params[:title], :author => params[:author]}
+        @@data << {:title => params[:title], :author => params[:author]}
         redirect_to "/"
     end
 
     #Update a book
     def update
-        
-        @data << {:title => params[:title], :author => params[:author]}
-        redirect_to "/"
+
+        # @@data << {:title => params[:title], :author => params[:author]}
+        # redirect_to "/"
     end
 
     #Remove a book
@@ -34,7 +34,7 @@ class BooksController < ApplicationController
 
     private
     def setup_data
-        @data = [
+        @@data = [
             { title: "Harry Potter", author: "J.K Rowling" },
             { title: "Name of the wind", author: "Patrick Rothfuss" }
         ]
